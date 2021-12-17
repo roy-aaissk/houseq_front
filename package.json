@@ -10,6 +10,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "bootstrap-vue": "^2.21.2",
     "cache-loader": "^4.1.0",
     "core-js": "^3.20.0",
     "nuxt": "^2.13.3",
