@@ -1,13 +1,12 @@
-FROM node:13.8-alpine
+FROM node:16-alpine
 
 RUN apk update && \
-    apk add git python make g++ && \
-    apk add --no-cache curl && \
-    curl -o- -L https://yarnpkg.com/install.sh | sh && \
-    yarn add @vue/cli @vue/cli-service-global nuxt create-nuxt-app
+    yarn global add create-nuxt-app
 
 ENV TZ Asia/Tokyo
 ENV PATH $HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH
+ENV HOST 0.0.0.0
+EXPOSE 3000
 
 WORKDIR /app
 
