@@ -36,9 +36,25 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/auth',
+    '@nuxtjs/axios',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  auth: {
+    strategies: {
+      auth0: {
+        domain: 'dev-szq8bqvo.us.auth0.com',
+        client_id: 'dTF1Op3gxTeTd8zIYZmIMmhTIjUOvpGt',
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/logout',
+      callback: '/callback',
+      home: '/mypage',
+    },
   }
 }
