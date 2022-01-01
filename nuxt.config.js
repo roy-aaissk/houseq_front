@@ -32,7 +32,9 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -41,5 +43,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  auth: {
+    // Options
   }
 }
