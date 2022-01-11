@@ -34,7 +34,8 @@ export default {
   buildModules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/proxy'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -44,7 +45,26 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   },
+
   auth: {
-    // Options
-  }
+    strategies: {
+      auth0: {
+        domain: 'dev-szq8bqvo.us.auth0.com',
+        clientId: 'uH7X21sYgOp9uZK3rfOGWodpuG9oJdfx',
+        logoutRedirectUri: 'http://localhost:3000',
+      }
+    },
+    redirect: {
+      login: '/',
+      logout: '/',
+      callback: '/callback',
+      home: '/mypage',
+    },
+  },
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api': 'http://localhost:8000',
+  },
 }
