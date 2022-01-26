@@ -67,7 +67,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 export default Vue.extend({
-  name: 'MyPage',
+  name: 'detail',
   // middleware: [ 'auth', userAuth ],
   computed: {
     famlyName() {
