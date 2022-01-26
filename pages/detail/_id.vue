@@ -9,12 +9,12 @@
     </div>
     <div class="border-t border-gray-200 container mx-auto items-center">
       <dl>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" >
           <dt class="text-sm font-medium text-gray-500">
             質問項目名
           </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            寒いのが嫌だ
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
+            {{questions.title}}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -22,7 +22,7 @@
             質問タグ
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            メンテナンス
+            {{questions.tag}}
           </dd>
         </div>
         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -30,7 +30,7 @@
             回答
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス
+            {{questions.answer}}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -51,7 +51,41 @@
         </div>
       </dl>
   </div>
+  <div class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+    <NuxtLink to="../edit">
+      <button class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+        Edit
+      </button>
+    </NuxtLink>
+  </div>
   <Footer/>
 </div>
   </div>
 </template>
+
+<script>
+import Vue from 'vue'
+import axios from 'axios'
+export default Vue.extend({
+  name: 'MyPage',
+  // middleware: [ 'auth', userAuth ],
+  computed: {
+    famlyName() {
+      return this.$auth.loggedIn ? this.$auth.$state.user.nickname : 'ゲスト'
+    },
+  },
+  data() {
+    return {
+      // title: this.$route.params.title,
+      questions: [],
+    }
+  },
+  mounted() {
+    const id = this.$route.params.id;
+    axios.get(`/api/show/${id}`)
+     .then((response) => this.questions = response.data)
+  }
+})
+</script>
+
+

@@ -65,6 +65,8 @@ export default {
     proxy: true
   },
   proxy: {
-    '/api': 'http://localhost:8000',
+    '/api/': {
+      target: process.env.BASE_URL,
+    }
   },
 }
