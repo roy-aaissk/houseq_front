@@ -8,13 +8,13 @@
       </h3>
     </div>
     <div class="border-t border-gray-200 container mx-auto items-center">
-      <dl v-for="question in questions" :key=question.id>
-        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+      <dl>
+        <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" >
           <dt class="text-sm font-medium text-gray-500">
             質問項目名
           </dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            {{question.title}}
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
+            {{questions.title}}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -22,7 +22,6 @@
             質問タグ
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            {{question.tag}}
           </dd>
         </div>
         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -30,7 +29,6 @@
             回答
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            {{question.answer}}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -69,12 +67,14 @@ export default Vue.extend({
   },
   data() {
     return {
+      // title: this.$route.params.title,
       questions: [],
     }
   },
   mounted() {
-    axios.get('/api/index')
-     .then((response) => this.questions = response.data + this.$route.params.id)
+    const id = this.$route.params.id;
+    axios.get(`/api/show/${id}`)
+     .then((response) => this.questions = response.data)
   }
 })
 </script>
