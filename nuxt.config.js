@@ -69,4 +69,7 @@ export default {
       target: process.env.BASE_URL,
     }
   },
+  router: {
+    middleware: 'auth'
+  },
 }
