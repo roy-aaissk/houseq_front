@@ -68,15 +68,13 @@ import Vue from 'vue'
 import axios from 'axios'
 export default Vue.extend({
   name: 'detail',
-  // middleware: [ 'auth', userAuth ],
   computed: {
-    famlyName() {
+    familyName(){
       return this.$auth.loggedIn ? this.$auth.$state.user.nickname : 'ゲスト'
     },
   },
   data() {
     return {
-      // title: this.$route.params.title,
       questions: [],
     }
   },
