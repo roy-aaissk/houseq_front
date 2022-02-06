@@ -82,7 +82,7 @@ export default Vue.extend({
   },
   methods: {
     fetchContent() {
-      const url = `/api/show/${this.$route.params.id}`
+      const url = `/api/questions/${this.$route.params.id}`
       this.$axios.get(url)
       .then((res) => {
         this.questions = res.data

@@ -50,7 +50,7 @@ export default Vue.extend({
   },
   methods: {
     index(){
-      axios.get('/api/index')
+      axios.get('/api/questions')
      .then((response) => {this.questions = response.data});
     },
   },
