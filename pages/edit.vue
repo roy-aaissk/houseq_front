@@ -11,28 +11,28 @@
       <!-- フォーム送信 -->
       <div>
         <dl>
-          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" v-for="(question) in questions" :key="question.id">
+          <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6" >
             <dt class="text-sm font-medium text-gray-500">
               質問項目名
             </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              <!-- {{question.title}} -->
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
+              {{ questions.title }}
             </dd>
           </div>
           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-gray-500">
               質問タグ
             </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              メンテナンス
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
+              {{questions.tag}}
             </dd>
           </div>
           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt class="text-sm font-medium text-gray-500">
               回答
             </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-              回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス回答アドバイス
+            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
+              {{questions.answer}}
             </dd>
           </div>
           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -52,7 +52,7 @@
             </dd>
           </div>
         </dl>
-        <button type="submit" class="flex ml-auto mt-5 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">更新</button>
+        <button type="submit" class="flex ml-auto mt-5 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" @click="update()">更新</button>
       </div>
   </div>
   <Footer/>
@@ -76,13 +76,22 @@ export default Vue.extend({
     }
   },
   methods: {
-    index(){
-      axios.get('/api/index')
-     .then((response) => {this.questions = response.data});
+    fetchContent() {
+      const url = `/api/show/${this.$route.query.id}`
+      this.$axios.get(url)
+      .then((res) => {
+        this.questions = res.data
+      })
+      .catch(() => {
+        this.toTop()
+      })
+    },
+    toTop(){
+      this.$router.push('/mypage');
     },
   },
   mounted() {
-     this.index();
+    this.fetchContent()
   }
 })
 </script>
