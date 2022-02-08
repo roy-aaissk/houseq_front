@@ -62,7 +62,7 @@ export default {
     },
   },
   axios: {
-    proxy: true
+    proxy: true,
   },
   proxy: {
     '/api/': {

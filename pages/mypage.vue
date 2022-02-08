@@ -8,7 +8,7 @@
         <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">質問事項一覧</h1>
       </div>
       <div class="flex flex-wrap -m-4">
-        <div class="p-4 md:w-1/3" v-for="question in questions" :key=question.id>
+        <div class="p-4 md:w-1/3" v-for="question in $store.getters['list/getCount']" :key=question.id>
           <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
             <div class="flex items-center mb-3">
               <h2 class="text-gray-900 text-lg title-font font-medium" v-if="question.title" >{{question.title}}</h2>
@@ -35,6 +35,7 @@
 <script>
 import Vue from 'vue'
 import axios from 'axios'
+import { mapActions, mapState } from "vuex";
 export default Vue.extend({
   name: 'MyPage',
   // middleware: [ 'auth', userAuth ],
@@ -42,20 +43,27 @@ export default Vue.extend({
     famlyName() {
       return this.$auth.loggedIn ? this.$auth.$state.user.nickname : 'ゲスト'
     },
+    ...mapState({
+      viewList: (state) => state.posts.viewList,
+    })
   },
   data() {
     return {
-      questions: [],
+      // questions: [],
     }
   },
   methods: {
-    index(){
-      axios.get('/api/questions')
-     .then((response) => {this.questions = response.data});
-    },
+    // index(){
+    //   axios.get('/api/questions')
+    //  .then((response) => {this.questions = response.data});
+    // },
+    ...mapActions({
+      getList: 'list/getList'
+    })
   },
   mounted() {
-     this.index();
+    //  this.index()
+     this.getList()
   }
 })
 </script>
