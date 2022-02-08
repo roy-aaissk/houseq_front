@@ -34,8 +34,7 @@
 
 <script>
 import Vue from 'vue'
-import axios from 'axios'
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 export default Vue.extend({
   name: 'MyPage',
   // middleware: [ 'auth', userAuth ],
@@ -43,26 +42,13 @@ export default Vue.extend({
     famlyName() {
       return this.$auth.loggedIn ? this.$auth.$state.user.nickname : 'ゲスト'
     },
-    ...mapState({
-      viewList: (state) => state.posts.viewList,
-    })
-  },
-  data() {
-    return {
-      // questions: [],
-    }
   },
   methods: {
-    // index(){
-    //   axios.get('/api/questions')
-    //  .then((response) => {this.questions = response.data});
-    // },
     ...mapActions({
       getList: 'list/getList'
     })
   },
   mounted() {
-    //  this.index()
      this.getList()
   }
 })
