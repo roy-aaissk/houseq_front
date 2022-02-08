@@ -16,7 +16,7 @@
               質問項目名
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
-              {{ questions.title }}
+              <input type="text" id="name" name="name" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" v-model="questions.title">
             </dd>
           </div>
           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -24,7 +24,7 @@
               質問タグ
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
-              {{questions.tag}}
+              <input type="text" id="name" name="name" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" v-model="questions.tag">
             </dd>
           </div>
           <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -32,7 +32,7 @@
               回答
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
-              {{questions.answer}}
+              <input type="text" id="name" name="name" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" v-model="questions.answer">
             </dd>
           </div>
           <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
