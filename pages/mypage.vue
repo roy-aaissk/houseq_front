@@ -16,7 +16,7 @@
             <div class="flex-grow">
               <p class="leading-relaxed text-base" v-if="question.answer">{{question.answer}}</p>
               <div>
-                <NuxtLink class="mt-3 text-indigo-500 inline-flex items-center" :to="{ path: `/detail/${question.id}` }">もっと見る
+                <NuxtLink class="mt-3 text-indigo-500 inline-flex items-center" :to="{ path: `/detail/${question.id}` }" @click.native="getId(question.id)">もっと見る
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                   <path d="M5 12h14M12 5l7 7-7 7"></path>
                 </svg>
@@ -44,9 +44,12 @@ export default Vue.extend({
     },
   },
   methods: {
+    getId(id) {
+      this.$store.dispatch('list/getId', {id: id})
+    },
     ...mapActions({
-      getList: 'list/getList'
-    })
+      getList: 'list/getList',
+    }),
   },
   mounted() {
      this.getList()
