@@ -14,7 +14,7 @@
             質問項目名
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
-            {{questions.title}}
+            {{ $store.getters['list/getId'].title }}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -22,7 +22,7 @@
             質問タグ
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            {{questions.tag}}
+            {{ $store.getters['list/getId'].tag }}
           </dd>
         </div>
         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -30,7 +30,7 @@
             回答
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            {{questions.answer}}
+            {{ $store.getters['list/getId'].answer }}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -64,7 +64,6 @@
 
 <script>
 import Vue from 'vue'
-import axios from 'axios'
 export default Vue.extend({
   name: 'detail',
   computed: {
@@ -72,27 +71,9 @@ export default Vue.extend({
       return this.$auth.loggedIn ? this.$auth.$state.user.nickname : 'ゲスト'
     },
   },
-  data() {
-    return {
-      questions: [],
-    }
-  },
-  mounted() {
-    this.fetchContent()
-  },
   methods: {
-    fetchContent() {
-      const url = `/api/questions/${this.$route.params.id}`
-      this.$axios.get(url)
-      .then((res) => {
-        this.questions = res.data
-      })
-      .catch(() => {
-        this.toTop()
-      })
-    },
     toEdit(){
-      this.$router.push({path: '../edit', query: {id: this.$route.params.id}})
+      this.$router.push('../edit')
     },
     toTop(){
       this.$router.push('/mypage');
