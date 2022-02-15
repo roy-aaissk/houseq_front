@@ -1,12 +1,14 @@
-import axios from 'axios'
-
 export const state = () => ({
   list: [],
-  id: []
+  id: [],
+  updata: [],
+  isEdit: false,
 })
 export const getters = {
   getCount: state => state.list,
-  getId: state => state.id
+  getId: state => state.id,
+  getUpdate: state => state.updata,
+  isEdit: state =>  state.isEdit,
 }
 
 export const mutations = {
@@ -15,6 +17,12 @@ export const mutations = {
   },
   getId (state, quesiotiondetail){
     state.id = quesiotiondetail
+  },
+  putList(state, updatelist) {
+    state.updata = updatelist
+  },
+  toggleEdit( state ){
+    state.isEdit = !state.isEdit
   }
 }
 
@@ -27,5 +35,17 @@ export const actions = {
   async getId ({commit}, {id}) {
     const res = await this.$axios.$get(`/api/questions/${id}`)
     commit('getId', res)
+  },
+
+  async updateId ({commit}, {id}) {
+    const res = await this.$axios.$get(`/api/questions/${id}`)
+    commit('getId', res)
+  },
+
+  TOGGLE_EDIT ({commit}) {
+    commit('toggleEdit')
   }
 }
+
+
+
