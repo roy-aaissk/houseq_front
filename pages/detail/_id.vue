@@ -6,6 +6,7 @@
       <h3 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">
         質問詳細ページ
       </h3>
+      <p></p>
     </div>
     <div class="border-t border-gray-200 container mx-auto items-center">
       <dl>
@@ -14,7 +15,7 @@
             質問項目名
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2" >
-            {{ $store.getters['list/getId'].title }}
+            {{ question_detail.title }}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -22,7 +23,7 @@
             質問タグ
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            {{ $store.getters['list/getId'].tag }}
+            {{ question_detail.tag}}
           </dd>
         </div>
         <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -30,7 +31,7 @@
             回答
           </dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            {{ $store.getters['list/getId'].answer }}
+            {{ question_detail.answer }}
           </dd>
         </div>
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -51,35 +52,49 @@
         </div>
       </dl>
   </div>
-  <div class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-    <button class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" @click="toEdit">
-      Edit
-    </button>
+  <div class="md:ml-auto flex flex-wrap items-center text-base justify-center" id="edit">
+    <template v-if="isEdit">
+      <button class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+        Save
+      </button>
+      <button class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" @click="toggleEdit">
+        Cancel
+      </button>
+    </template>
+    <template v-else>
+      <button class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" @click="toggleEdit">
+        Edit
+      </button>
+    </template>
   </div>
 
-  <Footer/>
-</div>
+      <Footer/>
+    </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import { mapActions, mapGetters } from "vuex";
 export default Vue.extend({
   name: 'detail',
   computed: {
     familyName(){
       return this.$auth.loggedIn ? this.$auth.$state.user.nickname : 'ゲスト'
     },
+    ...mapGetters({
+      isEdit: "list/isEdit",
+      question_detail: "list/getId",
+    })
   },
   methods: {
-    toEdit(){
-      this.$router.push('../edit')
-    },
-    toTop(){
-      this.$router.push('/mypage');
-    },
+    ...mapActions({
+      toggleEdit: 'list/TOGGLE_EDIT'
+    })
   }
 })
+
+
 </script>
 
 
