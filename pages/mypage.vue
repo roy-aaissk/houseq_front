@@ -8,10 +8,11 @@
         <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">質問事項一覧</h1>
       </div>
       <div class="flex flex-wrap -m-4">
-        <div class="p-4 md:w-1/3" v-for="question in $store.getters['list/getCount']" :key=question.id>
+        <div class="p-4 md:w-1/3" v-for="(question, index) in $store.getters['list/getCount']" :key=question.id>
+          <div class="hidden">{{ index }}</div>
           <div class="flex rounded-lg h-full bg-gray-100 p-8 flex-col">
             <div class="flex items-center mb-3">
-              <h2 class="text-gray-900 text-lg title-font font-medium" v-if="question.title" >{{question.title}}</h2>
+              <h2 class="text-gray-900 text-lg title-font font-medium"  v-if="question.title">{{question.title}}</h2>
             </div>
             <div class="flex-grow">
               <p class="leading-relaxed text-base" v-if="question.answer">{{question.answer}}</p>
@@ -26,6 +27,8 @@
           </div>
         </div>
       </div>
+      <NuxtLink class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" @click.native="Create()" :to="{ path: `create` }">Create
+      </NuxtLink>
     </div>
   </section>
   <Footer/>
@@ -50,9 +53,12 @@ export default Vue.extend({
     ...mapActions({
       getList: 'list/getList',
     }),
+    Create(question) {
+      console.log(question);
+    }
   },
   mounted() {
-     this.getList()
+    this.getList();
   }
 })
 </script>
